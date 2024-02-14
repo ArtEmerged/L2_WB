@@ -51,7 +51,7 @@ type Email struct{}
 func (e *Email) SendsNotice(user *User, orderId string) {
 	// Здесь может содержаться вся бизнес-логика для отправки уведомления по email,
 	// у структуры Email могут присутствовать подобные методы (GetEmailByUserId, EmailServiceConnection)
-	fmt.Printf("[email] %s, ваш заказ:%s готов к выдачи\n", user.Name, orderId)
+	fmt.Printf("[email] %s, ваш заказ:%s готов к выдаче\n", user.Name, orderId)
 }
 
 type App struct{}
@@ -60,7 +60,7 @@ type App struct{}
 func (a *App) SendsNotice(user *User, orderId string) {
 	// Здесь может содержаться вся бизнес-логика для отправки уведомления в приложение,
 	// у структуры App могут присутствовать подобные методы (AppServiceConnection)
-	fmt.Printf("[app] %s, ваш заказ:%s готов к выдачи\n", user.Name, orderId)
+	fmt.Printf("[app] %s, ваш заказ:%s готов к выдаче\n", user.Name, orderId)
 }
 
 type Sms struct{}
@@ -69,5 +69,5 @@ type Sms struct{}
 func (s *Sms) SendsNotice(user *User, orderId string) {
 	// Здесь может содержаться вся бизнес-логика для отправки уведомления по SMS,
 	// у структуры Sms могут присутствовать подобные методы (GetPhoneByUserId, SmsServiceConnection)
-	fmt.Printf("[sms] %s, ваш заказ:%s готов к выдачи\n", user.Name, orderId)
+	fmt.Printf("[sms] %s, ваш заказ:%s готов к выдаче\n", user.Name, orderId)
 }
