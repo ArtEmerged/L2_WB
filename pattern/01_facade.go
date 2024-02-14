@@ -42,7 +42,7 @@ type User struct {
 }
 
 func (u *User) GetUserById(id int) *User {
-	return &User{5, "Петя"}
+	return &User{id, "Петя"}
 }
 
 type Email struct{}
