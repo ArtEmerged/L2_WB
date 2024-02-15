@@ -52,7 +52,7 @@ type Email struct{}
 func (e *Email) SendsNotice(user *User, orderID string) {
 	// Здесь может содержаться вся бизнес-логика для отправки уведомления по email,
 	// у структуры Email могут присутствовать подобные методы (GetEmailByUserID, EmailServiceConnection)
-	fmt.Printf("[email] %s, ваш заказ:%s готов к выдаче\n", user.Name, orderID)
+	fmt.Printf("[email] %s, ваш заказ:%s готов к выдаче!\n", user.Name, orderID)
 }
 
 // App обеспечивает взамодействие c приложением
@@ -62,7 +62,7 @@ type App struct{}
 func (a *App) SendsNotice(user *User, orderID string) {
 	// Здесь может содержаться вся бизнес-логика для отправки уведомления в приложение,
 	// у структуры App могут присутствовать подобные методы (AppServiceConnection)
-	fmt.Printf("[app] %s, ваш заказ:%s готов к выдаче\n", user.Name, orderID)
+	fmt.Printf("[app] %s, ваш заказ:%s готов к выдаче!\n", user.Name, orderID)
 }
 
 // SMS обеспечивает взамодействие c sms сервисом
@@ -72,5 +72,10 @@ type SMS struct{}
 func (s *SMS) SendsNotice(user *User, orderID string) {
 	// Здесь может содержаться вся бизнес-логика для отправки уведомления по SMS,
 	// у структуры Sms могут присутствовать подобные методы (GetPhoneByUserID, SmsServiceConnection)
-	fmt.Printf("[sms] %s, ваш заказ:%s готов к выдаче\n", user.Name, orderID)
+	fmt.Printf("[sms] %s, ваш заказ:%s готов к выдаче!\n", user.Name, orderID)
 }
+
+// func main() {
+// 	notice := NotificationFacade{}
+// 	notice.Send(444321, "DfE42vD")
+// }
