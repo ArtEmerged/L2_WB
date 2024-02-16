@@ -1,0 +1,11 @@
+1. Golang 500
+10. Swift 420
+11. Rust 380
+2. C 400
+3. C++ 900
+4. C# 450
+5. Python 1200
+6. JavaScript 1300
+7. Java 950
+8. PHP 450
+9. Kotlin 600

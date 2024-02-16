@@ -5,16 +5,12 @@
 1Hello
 1amount
 5
-5
 9Hot
-9Hot
-Go
 Go
 Golang
 Meet
 meet
 Ёлка
 Андрей
-Привет
 Привет
 автобус
