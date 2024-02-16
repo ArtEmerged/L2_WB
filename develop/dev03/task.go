@@ -38,11 +38,15 @@ import (
 */
 
 var (
+	// ErrArgs - ошибка некорректной передачи аргументов 
 	ErrArgs       = errors.New("sort: the number of arguments has been exceeded")
+	// ErrColumn - ошибка некорректной передачи колонки для сортировки  
 	ErrColumn     = errors.New("sort: invalid number in column option")
+	// ErrNoSuchFile - не удалось прочитать файл 
 	ErrNoSuchFile = errors.New("sort: no such file or directory")
 )
 
+// Parameters - структура для передачи флагов и аргументов и исполняющую функцию 
 type Parameters struct {
 	columnFlag  int
 	numberFlag  bool
@@ -69,6 +73,7 @@ func main() {
 	outputResult(res)
 }
 
+// Run - выполняем процесс чтения и обработки данных для сортировки 
 func Run(parameters Parameters) ([]string, error) {
 	// Проверяем правильность переданных аргументов
 	err := validate(parameters.columnFlag, parameters.args)
