@@ -1,9 +1,7 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
 	"slices"
 	"strings"
 )
@@ -27,11 +25,6 @@ import (
 Программа должна проходить все тесты. Код должен проходить проверки go vet и golint.
 */
 
-var (
-	// ErrLetter - ошибка некорректного ввода буквы
-	ErrLetter = errors.New("anagram: incorrect letter entry")
-)
-
 // sortSlice - сортирует срезы строк в map
 func sortSlice(anagramSets map[string][]string) {
 	for _, words := range anagramSets {
@@ -40,7 +33,7 @@ func sortSlice(anagramSets map[string][]string) {
 }
 
 // generatesAnagram - генерирует уникальный ключ для анаграмм
-func generatesAnagram(word string) ([33]uint8, error) {
+func generatesAnagram(word string) ([33]uint8, bool) {
 	// Создаем массив из 33 элементов, у каждой буквы свой индекс
 	anagram := [33]uint8{}
 	for _, letter := range word {
@@ -49,27 +42,23 @@ func generatesAnagram(word string) ([33]uint8, error) {
 		index := int(letter - 'а')
 		// Проверка на русские буквы нижнего регистра
 		if index < 0 || index > 32 {
-			return anagram, ErrLetter
+			return anagram, false
 		}
 		anagram[index]++
 	}
-	return anagram, nil
+	return anagram, true
 }
 
 func main() {
-	arr := []string{"пятак", "тяпка", "пятка", "пудра", "пятка", "листок", "мох", "ГоРа","рОга", "слиток", "столик"}
-	res, err := searchForAnagramSets(&arr)
-	if err != nil {
-		fmt.Fprint(os.Stderr, err)
-		os.Exit(1)
-	}
+	arr := []string{"пятак", "тяпка", "пятка", "пудра", "пятка", "листок", "мох", "ГоРа", "рОга", "слиток", "столик"}
+	res := searchForAnagramSets(&arr)
 	fmt.Println(res)
 }
 
 // searchForAnagramSets - выполняет поиск всех множеств анаграмм по словарю.
-// Функция возвращает отсортированное множество анаграмм  map[string][]string.
-// Если в функцию передан словарь не с русскими буквами, то функция возвращает ошибку ErrLetter.
-func searchForAnagramSets(words *[]string) (*map[string][]string, error) {
+// Функция возвращает указатель отсортированное множество анаграмм  *map[string][]string.
+// Если в функцию передан словарь не с русскими буквами, то функция указатель на пустую map.
+func searchForAnagramSets(words *[]string) *map[string][]string {
 	// Объявляем map result для хранения отсортированных множеств анаграмм
 	result := make(map[string][]string)
 	// Объявляем map для хранения анаграмм
@@ -87,10 +76,10 @@ func searchForAnagramSets(words *[]string) (*map[string][]string, error) {
 		set[word] = struct{}{}
 
 		// Генерируем уникальный массив для хранения анаграмм
-		anagramWord, err := generatesAnagram(word)
+		anagramWord, ok := generatesAnagram(word)
 		// Возвращаем ошибку, если буква не соответствует требованиям
-		if err != nil {
-			return nil, err
+		if !ok {
+			return &map[string][]string{}
 		}
 
 		// Добавляем слово в массив анаграмм
@@ -117,5 +106,5 @@ func searchForAnagramSets(words *[]string) (*map[string][]string, error) {
 	}
 	sortSlice(result)
 
-	return &result, nil
+	return &result
 }
