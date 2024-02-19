@@ -1,0 +1,28 @@
+Overview
+Package regexp implements regular expression search.
+
+The syntax of the regular 
+expressions accepted is the
+same general syntax used by Perl,
+Python,
+and other languages.
+More precisely,
+it is the syntax accepted by RE2 and described at https://golang.org/s/re2syntax, 
+except for \C. For an overview of the syntax, see the regexp/syntax package.
+
+The regexp implementation provided by this package 
+is guaranteed to run in time linear in the size of the input. 
+(This is a property not guaranteed by most open source implementations of regular expressions.) 
+For more information about this property, see
+
+https://swtch.com/~rsc/regexp/regexp1.html
+
+or any book    about automata theory.
+
+All characters are UTF-8-encoded code points. Following utf8.DecodeRune,
+each byte of an invalid UTF-8 sequence is treated as 
+if it encoded utf8.RuneError (U+FFFD).
+
+There are 16 methods of Regexp that match a regular
+expression and identify the matched text.
+Their names are matched by this regular expression:

@@ -1,5 +1,11 @@
 package main
 
+import (
+	"develop/dev5/grep"
+	"fmt"
+	"os"
+)
+
 /*
 === Утилита grep ===
 
@@ -19,5 +25,16 @@ package main
 */
 
 func main() {
+	options, err := grep.ParseArgs()
+	if err != nil {
+		fmt.Fprint(os.Stderr, err)
+		os.Exit(1)
+	}
+
+	err = grep.RunGrep(os.Stdin, os.Stdout, options)
+	if err != nil {
+		fmt.Fprint(os.Stderr, err)
+		os.Exit(1)
+	}
 
 }
