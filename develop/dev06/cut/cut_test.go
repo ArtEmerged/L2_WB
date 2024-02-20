@@ -124,14 +124,14 @@ func TestCut(t *testing.T) {
 			inputData: "",
 			options:   NewOptions([]string{"testdata/test2.txt"}, "0", ":", false),
 			want:      "",
-			wantErr:   ErrNubmerLessOne,
+			wantErr:   ErrNumberLessOne,
 		},
 		{
 			name:      "error check3.1:Nubmer Less One",
 			inputData: "",
 			options:   NewOptions([]string{"testdata/test2.txt"}, "", ":", false),
 			want:      "",
-			wantErr:   ErrNubmerLessOne,
+			wantErr:   ErrNumberLessOne,
 		},
 		{
 			name:      "error check4:Invalid Range",
