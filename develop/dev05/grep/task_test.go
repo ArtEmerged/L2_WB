@@ -97,7 +97,7 @@ func TestGrep(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			reader := strings.NewReader(test.inputData)
 			var buffer bytes.Buffer
-			gotErr := RunGrep(reader, &buffer, test.options)
+			gotErr := Run(reader, &buffer, test.options)
 			got := buffer.String()
 			if gotErr != nil {
 				if gotErr.Error() != test.wantErr.Error() {
@@ -110,3 +110,4 @@ func TestGrep(t *testing.T) {
 		})
 	}
 }
+
