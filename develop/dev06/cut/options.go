@@ -4,10 +4,11 @@ import "flag"
 
 // Options - структура для хранения опций
 type Options struct {
-	FilesName []string // имена файлов
-	Fields    string   // -f
-	Delimiter string   // -d
-	Separated bool     // -s
+	FilesName []string // Имена файлов, которые нужно обработать
+	Fields    string   // -f: выбор указанных полей; также выводится любая строка, которая не содержит разделитель
+	Delimiter string   // -d: использовать DELIM вместо TAB в качестве разделителя полей
+	Separated bool     // -s: не выводить строки, не содержащие разделителей
+
 }
 
 // NewOptions - конструктор для Options

@@ -1,12 +1,15 @@
 package cut
 
-import "errors"
+import (
+	"errors"
+	"math"
+)
 
 const (
 	//EmptyStart - default value для FromStartTo
 	EmptyStart = 0
 	//EmptyEnd - default value для FromToEnd
-	EmptyEnd = 999999
+	EmptyEnd = math.MaxInt
 )
 
 var (
