@@ -171,4 +171,5 @@ func (d *Director) CreateComputer() Computer {
 // 	// Создание компьютера Asus через директора с новым строителем
 // 	computerAsus := direcor.CreateComputer()
 // 	fmt.Println(computerAsus)
+
 // }
