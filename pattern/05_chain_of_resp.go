@@ -25,25 +25,25 @@ package pattern
 
 import "fmt"
 
-// DATA_TYPE определяет тип данных для ключей кэша
-type DATA_TYPE int
+// DataType определяет тип данных для ключей кэша
+type DataType int
 
 // Константы для типов данных
 const (
-	DATA DATA_TYPE = iota
+	DATA DataType = iota
 	JAVASCRIPT
 	CSS
 )
 
 // Data представляет данные, которые будут обрабатываться цепочкой
 type Data struct {
-	dataType DATA_TYPE
+	dataType DataType
 	key      string
 	value    string
 }
 
 // NewData - конструктор для данных
-func NewData(dataType DATA_TYPE, key, value string) *Data {
+func NewData(dataType DataType, key, value string) *Data {
 	return &Data{
 		dataType: dataType,
 		value:    value,
@@ -62,7 +62,7 @@ func (data *Data) GetValue() string {
 }
 
 // GetDataType возвращает тип данных
-func (data *Data) GetDataType() DATA_TYPE {
+func (data *Data) GetDataType() DataType {
 	return data.dataType
 }
 

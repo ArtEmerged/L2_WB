@@ -26,8 +26,8 @@ import "fmt"
 	- Фабрика рискует стать "супер-объектом", привязанным ко всем классам программы.
 */
 
-// Order - интерфейс продукта
-type Order interface {
+// OrderF - интерфейс продукта
+type OrderF interface {
 	GetDetails() string
 }
 
@@ -64,7 +64,7 @@ type OrderFactory interface {
 type BookOrderFactory struct{}
 
 // CreateOrder - создает заказ на книгу
-func (bof *BookOrderFactory) CreateOrder() Order {
+func (bof *BookOrderFactory) CreateOrder() OrderF {
 	return &BookOrder{
 		Title:  "Go идиомы и паттерны проектирования",
 		Author: "Джон Боднер",
@@ -72,7 +72,7 @@ func (bof *BookOrderFactory) CreateOrder() Order {
 	}
 }
 
-// BookOrderFactory - конструктор фаблрики заказов на книги
+// NewBookOrderFactory - конструктор фаблрики заказов на книги
 func NewBookOrderFactory() *BookOrderFactory {
 	return &BookOrderFactory{}
 }
@@ -81,7 +81,7 @@ func NewBookOrderFactory() *BookOrderFactory {
 type ElectronicOrderFactory struct{}
 
 // CreateOrder - создает заказ на электронное устройство
-func (eof *ElectronicOrderFactory) CreateOrder() Order {
+func (eof *ElectronicOrderFactory) CreateOrder() OrderF {
 	return &ElectronicOrder{
 		Product: "Smartphone",
 		Model:   "iPhone 15 ProMax",

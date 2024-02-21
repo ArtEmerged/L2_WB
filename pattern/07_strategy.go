@@ -70,18 +70,18 @@ func (p *sbpPayment) Pay() {
 	fmt.Println("СБП Payment")
 }
 
-// Order - заказ, который будет обрабатываться с помощью определенного способа оплаты
-type Order struct {
+// OrderW - заказ, который будет обрабатываться с помощью определенного способа оплаты
+type OrderW struct {
 	payment Payment
 }
 
 // setPayment устанавливает способ оплаты для заказа
-func (order *Order) setPayment(payment Payment) {
+func (order *OrderW) setPayment(payment Payment) {
 	order.payment = payment
 }
 
 // processOrder обрабатывает заказ с помощью установленного способа оплаты
-func (order *Order) processOrder() {
+func (order *OrderW) processOrder() {
 	order.payment.Pay()
 }
 

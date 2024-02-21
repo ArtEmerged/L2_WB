@@ -9,7 +9,7 @@ import "fmt"
 */
 
 /*
-	Комманда - это паттерн поведенческого проектирования, в котором объект используется для инкапсуляции всей информации,
+	Комманда — это паттерн поведенческого проектирования, в котором объект используется для инкапсуляции всей информации,
 	необходимой для выполнения действий или запуска события в более позднее время.
 
 	Шаблон "команды" полезен:
@@ -25,90 +25,90 @@ import "fmt"
 	- Усложняет кот программы из-за введения множества дополнительных класснов.
 */
 
-// UiCommand - командный интерфейс
-type UiCommand interface {
+// UICommand - командный интерфейс
+type UICommand interface {
 	Print()
 	Remove()
 }
 
-// ButtonUi - является конкретной командой, структура реализующая интерфейс UiCommand
-type ButtonUi struct {
+// Button - является конкретной командой, структура реализующая интерфейс Command
+type Button struct {
 	name string
 }
 
-// NewButtonUi - конструктор для новой команды
-func NewButtonUi(name string) *ButtonUi {
-	return &ButtonUi{name}
+// NewButton - конструктор для новой команды
+func NewButton(name string) *Button {
+	return &Button{name}
 }
 
 // Print - метод для вывода названия команды
-func (buttonUi *ButtonUi) Print() {
-	fmt.Printf("Printing %s Button\n", buttonUi.name)
+func (button *Button) Print() {
+	fmt.Printf("Printing %s Button\n", button.name)
 }
 
 // Remove - метод для вывода сообщения об удалении команды
-func (buttonUi *ButtonUi) Remove() {
-	fmt.Printf("Removing %s Button\n", buttonUi.name)
+func (button *Button) Remove() {
+	fmt.Printf("Removing %s Button\n", button.name)
 }
 
-// InputUi - является конкретной командой, структура реализующая интерфейс UiCommand
-type InputUi struct{}
+// Input - является конкретной командой, структура реализующая интерфейс Command
+type Input struct{}
 
-// NewInputUi - конструктор для новой команды
-func NewInputUi() *InputUi {
-	return &InputUi{}
+// NewInput - конструктор для новой команды
+func NewInput() *Input {
+	return &Input{}
 }
 
 // Print - метод для вывода названия команды
-func (inputUi *InputUi) Print() {
+func (input *Input) Print() {
 	fmt.Println("Printing Input")
 }
 
 // Remove - метод для вывода сообщения об удалении команды
-func (inputUi *InputUi) Remove() {
+func (input *Input) Remove() {
 	fmt.Println("Removing Input")
 }
 
-// TableUi - является конкретной командой, структура реализующая интерфейс UiCommand
-type TableUi struct {
+// Table - является конкретной командой, структура реализующая интерфейс Command
+type Table struct {
 }
 
-// NewTableUi - конструктор для новой команды
-func NewTableUi() *TableUi {
-	return &TableUi{}
+// NewTable - конструктор для новой команды
+func NewTable() *Table {
+	return &Table{}
 }
 
 // Print - метод для вывода названия команды
-func (tableUi *TableUi) Print() {
+func (table *Table) Print() {
 	fmt.Println("Printing Table")
 }
 
 // Remove - метод для вывода сообщения об удалении команды
-func (tableUi *TableUi) Remove() {
+func (table *Table) Remove() {
 	fmt.Println("Removing Table")
 }
 
-// UiControl - структура выполнителя (invoker). Invoker ничего не знает о конкретной команде, он знает только об интерфейсе.
-type UiControl struct {
-	commandList []UiCommand
+// UIControl - структура выполнителя (invoker). Invoker ничего не знает о конкретной команде, он знает только об интерфейсе.
+type UIControl struct {
+	commandList []UICommand
 }
 
-// NewUiControl - конструктор выполнителя
-func NewUiControl() *UiControl {
-	return &UiControl{}
+// NewControl - конструктор выполнителя
+func NewControl() *UIControl {
+	return &UIControl{}
 }
 
 // AddElement - добавляет команду в очередь
-func (uiControl *UiControl) AddElement(uiCommand UiCommand) {
+func (uiControl *UIControl) AddElement(uiCommand UICommand) {
 	uiCommand.Print()
 	uiControl.commandList = append(uiControl.commandList, uiCommand)
 }
 
 // RemoveElement - удаляет команду из очереди
-func (uiControl *UiControl) RemoveElement(uiCommand UiCommand) {
+func (uiControl *UIControl) RemoveElement(uiCommand UICommand) {
 	uiCommand.Remove()
 
-	newList := []UiCommand{}
+	newList := []UICommand{}
 
 	for _, elem := range uiControl.commandList {
 		if elem != uiCommand {
@@ -120,27 +120,27 @@ func (uiControl *UiControl) RemoveElement(uiCommand UiCommand) {
 }
 
 // Undo - отменяет последнюю команду
-func (uiControl *UiControl) Undo() {
+func (uiControl *UIControl) Undo() {
 	uiCommand := uiControl.commandList[len(uiControl.commandList)-1]
 	uiControl.RemoveElement(uiCommand)
 }
 
 // func main() {
-// 	uiControl := NewUiControl()
-// 	inputUi := NewInputUi()
-// 	tableUi := NewTableUi()
-// 	buttonUi := NewButtonUi("Submit")
+// 	uiControl := NewUIControl()
+// 	inputUI := NewInputUI()
+// 	tableUI := NewTableUI()
+// 	buttonUI := NewButtonUI("Submit")
 
-// 	uiControl.AddElement(inputUi)
-// 	uiControl.AddElement(tableUi)
-// 	uiControl.AddElement(buttonUi)
+// 	uiControl.AddElement(inputUI)
+// 	uiControl.AddElement(tableUI)
+// 	uiControl.AddElement(buttonUI)
 
-// 	uiControl.RemoveElement(tableUi)
+// 	uiControl.RemoveElement(tableUI)
 
 // 	uiControl.AddElement(NewButtonUi("Cancel"))
-// 	uiControl.AddElement(NewTableUi())
-// 	uiControl.AddElement(NewInputUi())
-// 	uiControl.AddElement(NewButtonUi("Wrong button"))
+// 	uiControl.AddElement(NewTableUI())
+// 	uiControl.AddElement(NewInputUI())
+// 	uiControl.AddElement(NewButtonUI("Wrong button"))
 
 // 	uiControl.Undo()
 // 	uiControl.Undo()
