@@ -1,5 +1,11 @@
 package main
 
+import (
+	"develop/dev8/shell"
+	"fmt"
+	"os"
+)
+
 /*
 === Взаимодействие с ОС ===
 
@@ -15,5 +21,9 @@ package main
 */
 
 func main() {
-
+	err := shell.Run(os.Stdin, os.Stderr)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(0)
+	}
 }
