@@ -1,5 +1,11 @@
 package main
 
+import (
+	"develop/dev9/wget"
+	"fmt"
+	"os"
+)
+
 /*
 === Утилита wget ===
 
@@ -10,4 +16,9 @@ package main
 
 func main() {
 
+	err := wget.Run(os.Args[1:])
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 }
