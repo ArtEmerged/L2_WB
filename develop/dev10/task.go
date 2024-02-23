@@ -1,5 +1,11 @@
 package main
 
+import (
+	"develop/dev10/telnet"
+	"fmt"
+	"os"
+)
+
 /*
 === Утилита telnet ===
 
@@ -16,5 +22,9 @@ go-telnet --timeout=10s host port go-telnet mysite.ru 8080 go-telnet --timeout=3
 */
 
 func main() {
-
+	err := telnet.Run(os.Stdin, os.Stdout, os.Args[1:])
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 }
