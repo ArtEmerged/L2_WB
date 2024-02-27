@@ -38,15 +38,15 @@ import (
 */
 
 var (
-	// ErrArgs - ошибка некорректной передачи аргументов 
-	ErrArgs       = errors.New("sort: the number of arguments has been exceeded")
-	// ErrColumn - ошибка некорректной передачи колонки для сортировки  
-	ErrColumn     = errors.New("sort: invalid number in column option")
-	// ErrNoSuchFile - не удалось прочитать файл 
+	// ErrArgs - ошибка некорректной передачи аргументов
+	ErrArgs = errors.New("sort: the number of arguments has been exceeded")
+	// ErrColumn - ошибка некорректной передачи колонки для сортировки
+	ErrColumn = errors.New("sort: invalid number in column option")
+	// ErrNoSuchFile - не удалось прочитать файл
 	ErrNoSuchFile = errors.New("sort: no such file or directory")
 )
 
-// Parameters - структура для передачи флагов и аргументов и исполняющую функцию 
+// Parameters - структура для передачи флагов и аргументов и исполняющую функцию
 type Parameters struct {
 	columnFlag  int
 	numberFlag  bool
@@ -57,10 +57,10 @@ type Parameters struct {
 
 func main() {
 	parameters := Parameters{}
-	flag.IntVar(&parameters.columnFlag, "k", 1, "")       // -k — указание колонки для сортировки
-	flag.BoolVar(&parameters.numberFlag, "n", false, "")  // -n — сортировать по числовому значению
-	flag.BoolVar(&parameters.reverseFlag, "r", false, "") // -r — сортировать в обратном порядке
-	flag.BoolVar(&parameters.uniqueFlag, "u", false, "")  // -u — не выводить повторяющиеся строки
+	flag.IntVar(&parameters.columnFlag, "k", 1, "-k 1 specify the column for sorting")                  // -k — указание колонки для сортировки
+	flag.BoolVar(&parameters.numberFlag, "n", false, "-n  compare according to string numerical value") // -n — сортировать по числовому значению
+	flag.BoolVar(&parameters.reverseFlag, "r", false, "-r reverse the result of comparisons")           // -r — сортировать в обратном порядке
+	flag.BoolVar(&parameters.uniqueFlag, "u", false, "-u unique")                                       // -u — не выводить повторяющиеся строки
 	flag.Parse()
 
 	parameters.args = flag.Args()
@@ -73,7 +73,7 @@ func main() {
 	outputResult(res)
 }
 
-// Run - выполняем процесс чтения и обработки данных для сортировки 
+// Run - выполняем процесс чтения и обработки данных для сортировки
 func Run(parameters Parameters) ([]string, error) {
 	// Проверяем правильность переданных аргументов
 	err := validate(parameters.columnFlag, parameters.args)
