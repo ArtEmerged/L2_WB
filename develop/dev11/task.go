@@ -1,5 +1,20 @@
 package main
 
+import (
+	"context"
+	"develop/dev11/config"
+	"develop/dev11/internal/data"
+	"develop/dev11/internal/handler"
+	"develop/dev11/internal/server"
+	"develop/dev11/internal/service"
+	"flag"
+	"fmt"
+	"log"
+	"os"
+	"os/signal"
+	"syscall"
+)
+
 /*
 === HTTP server ===
 
@@ -23,5 +38,47 @@ package main
 */
 
 func main() {
+	cfgPath := flag.String("cfg", "./.env", "USAGE -cfg='path_to_config_file")
+	flag.Parse()
 
+	// Инициализация конфигураций
+	cfg, err := config.InitConfig(*cfgPath)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return
+	}
+
+	// Инициализация хранилища данных
+	data := data.New()
+
+	// Инициализация сервиса
+	service := service.New(data)
+
+	// Инициализация обработчика запросов
+	handler := handler.New(service)
+
+	// Создание HTTP сервера
+	httpServer := new(server.Server)
+
+	// Запуск HTTP сервера в горутине
+	go func() {
+		if err := httpServer.Run(cfg, handler.InitRouter()); err != nil {
+			log.Fatalf("error occured while running http server: %s", err.Error())
+		}
+	}()
+
+	log.Print("api server start")
+
+	// Создание канала для обработки сигналов завершения программы (Ctrl+C)
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+
+	<-quit
+
+	log.Print("api server shutting down")
+
+	// Остановка HTTP сервера
+	if err := httpServer.Shutdown(context.Background()); err != nil {
+		fmt.Fprintf(os.Stderr, "error occured on server shutting down: %s", err.Error())
+	}
 }
