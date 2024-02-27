@@ -31,7 +31,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err = grep.RunGrep(os.Stdin, os.Stdout, options)
+	err = grep.Run(os.Stdin, os.Stdout, options)
 	if err != nil {
 		fmt.Fprint(os.Stderr, err)
 		os.Exit(1)
